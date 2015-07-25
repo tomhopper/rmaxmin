@@ -1,7 +1,7 @@
 Package: rmaxmin
 Type: Package
 Title: Form row and column maximums and minimums
-Version: 0.2
+Version: 0.2.1
 Date: 2015-07-24
 Authors@R: c(person(given = "Thomas", family="Hopper",role = c("aut","cre"), email = "tomhopper@gmail.com"))
 Description: Form row and column maxima and minima for numeric arrays.

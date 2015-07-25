@@ -43,18 +43,15 @@ For data frames that include character or factor vectors, returns a character ve
 
 ## Complex numbers
 
-Max and min of complex numbers are determined using `Re(x)^2 + Im(x)^2`, which can result in ties that are returned as lists.
+Max and min of complex numbers are determined using the modulus, `Mod(x)`, with ties resolved by determining the phase angle with `Arg(x)`.
 
 ### Example
 
 ``` {r}
 > dfi <- data.frame(x = c(2+1i, 1+2i, 1+0i, 0+1i, 2+1i), y = c(0, 1, 2, 3, 4))
 > colMax(dfi)
-[[1]]
-[1] 2+1i 1+2i
-
-[[2]]
-[1] 4+0i
+   x    y 
+1+2i 4+0i
 
 ```
 
