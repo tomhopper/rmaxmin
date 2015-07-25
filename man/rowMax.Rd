@@ -2,7 +2,7 @@
 % Please edit documentation in R/myrowcol_func.R
 \name{rowMax}
 \alias{rowMax}
-\title{Form row maximums}
+\title{Form row maxima}
 \usage{
 rowMax(x, na.rm = TRUE, dims = 1L)
 }

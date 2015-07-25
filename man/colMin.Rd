@@ -2,7 +2,7 @@
 % Please edit documentation in R/myrowcol_func.R
 \name{colMin}
 \alias{colMin}
-\title{Form column minimums}
+\title{Form column minima}
 \usage{
 colMin(x, na.rm = TRUE, dims = 1L)
 }
