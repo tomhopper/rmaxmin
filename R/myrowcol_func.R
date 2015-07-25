@@ -1,6 +1,6 @@
 ## Missing colMax, colMin, rowMax, rowMin
 
-#' @title Form column maximums
+#' @title Form column maxima
 #' @description returns the maximum value by column for numeric arrays.
 #' @param x an array of two or more dimensions, containing numeric, complex, integer or logical values, or a numeric data frame.
 #' @param na.rm logical. if \code{TRUE}, remove \code{NA}s, otherwise do not remove (and return errors or warnings)
@@ -18,21 +18,18 @@ colMax  <- function(x, na.rm = TRUE, dims = 1L) {
   if (dims < 1L || dims > length(dn) - 1L)
     stop("invalid 'dims'")
   id <- seq_len(dims)
-  dn <- dn[id]
-  if (is.complex(x))
-    z <- apply(x, 2, function(x) unique(x[which(Re(x)^2 + Im(x)^2 == max(Re(x)^2 + Im(x)^2, na.rm = na.rm))]))
-  else
-    z <- apply(x, 2, function(x) max(x, na.rm = na.rm))
+  dn <- dn[-id]
+  z <- apply(x, 2, function(x) max_complex(x))
 
   if (length(dn) > 1L) {
     dim(z) <- dn
-    dimnames(z) <- dimnames(x)[id]
+    dimnames(z) <- dimnames(x)[-id]
   }
-  else names(z) <- dimnames(x)[[1L]]
+  else names(z) <- dimnames(x)[[dims + 1L]]
   return(z)
 }
 
-#' @title Form column minimums
+#' @title Form column minima
 #' @description returns the minimum value by column for numeric arrays.
 #' @param x an array of two or more dimensions, containing numeric, complex, integer or logical values, or a numeric data frame.
 #' @param na.rm logical. if \code{TRUE}, remove \code{NA}s, otherwise do not remove (and return errors or warnings)
@@ -50,18 +47,17 @@ colMin <- function(x, na.rm = TRUE, dims = 1L) {
   if (dims < 1L || dims > length(dn) - 1L)
     stop("invalid 'dims'")
   id <- seq_len(dims)
-  dn <- dn[id]
-  if (is.complex(x)) {   z <- apply(x, 2, function(x) unique(x[which(Re(x)^2 + Im(x)^2 == min(Re(x)^2 + Im(x)^2, na.rm = na.rm))]))}
-  else  {   z <- apply(x, 2, function(x) min(x, na.rm = na.rm))}
+  dn <- dn[-id]
+  z <- apply(x, 2, function(x) min_complex(x))
 
   if (length(dn) > 1L) {
     dim(z) <- dn
-    dimnames(z) <- dimnames(x)[id]
-  } else names(z) <- dimnames(x)[[1L]]
+    dimnames(z) <- dimnames(x)[-id]
+  } else names(z) <- dimnames(x)[[dims + 1L]]
   return(z)
 }
 
-#' @title Form row maximums
+#' @title Form row maxima
 #' @description returns the maximum value by row for numeric arrays.
 #' @param x an array of two or more dimensions, containing numeric, complex, integer or logical values, or a numeric data frame.
 #' @param na.rm logical. if \code{TRUE}, remove \code{NA}s, otherwise do not remove (and return errors or warnings)
@@ -80,10 +76,7 @@ rowMax  <- function(x, na.rm = TRUE, dims = 1L) {
     stop("invalid 'dims'")
   id <- seq_len(dims)
   dn <- dn[id]
-  if (is.complex(x))
-    z <- apply(x, 1, function(x) unique(x[which(Re(x)^2 + Im(x)^2 == max(Re(x)^2 + Im(x)^2, na.rm = na.rm))]))
-  else
-    z <- apply(x, 1, function(x) max(x, na.rm = na.rm))
+  z <- apply(x, 1, function(x) max_complex(x))
 
   if (length(dn) > 1L) {
     dim(z) <- dn
@@ -93,7 +86,7 @@ rowMax  <- function(x, na.rm = TRUE, dims = 1L) {
   return(z)
 }
 
-#' @title Form row minimums
+#' @title Form row minima
 #' @description returns the minimum value by row for numeric arrays.
 #' @param x an array of two or more dimensions, containing numeric, complex, integer or logical values, or a numeric data frame.
 #' @param na.rm logical. if \code{TRUE}, remove \code{NA}s, otherwise do not remove (and return errors or warnings)
@@ -112,10 +105,7 @@ rowMin  <- function(x, na.rm = TRUE, dims = 1L) {
     stop("invalid 'dims'")
   id <- seq_len(dims)
   dn <- dn[id]
-  if (is.complex(x))
-    z <- apply(x, 1, function(x) unique(x[which(Re(x)^2 + Im(x)^2 == min(Re(x)^2 + Im(x)^2, na.rm = na.rm))]))
-  else
-    z <- apply(x, 1, function(x) min(x, na.rm = na.rm))
+  z <- apply(x, 1, function(x) min_complex(x))
 
   if (length(dn) > 1L) {
     dim(z) <- dn

@@ -2,7 +2,9 @@
 
 Provides the "missing" functions `colMax()`, `colMin()`, `rowMax()` and `rowMin()`, calculating the maximum or minimum by row or column for a numeric array, matrix or data frame.
 
-The return type and class depend on the data supplied and in some cases may be a list. See below for details.
+Additionally, provides functions `max_complex()` and `min_complex()` to calculate maxima and minima for vectors. These default to the base package's `max()` and `min()`, and so could be used as full replacements for the standard functions.
+
+The return type and class depend on the data supplied, but should always be a vector.
 
 ### Example
 
@@ -55,6 +57,23 @@ Max and min of complex numbers are determined using `Re(x)^2 + Im(x)^2`, which c
 [1] 4+0i
 
 ```
+
+## Changes
+
+### 0.2
+#### New features
+* Functions `max_complex()` and `min_complex()` 
+
+#### Fixes
+* Fixed problem where ties would return a list showing ties, rather than just a vector.
+* Improved calculation of max and min. Now uses `Mod()`. Ties are resolved with `Arg()`.
+* Fixed error that triggered when row names were defined.
+
+#### Miscellaneous
+* Rewrite made code more maintainable.
+
+###0.1
+First release of functions previously used internally via `source()`
 
 ## To Do
 
